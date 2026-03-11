@@ -12,7 +12,7 @@ View the Presentation
 
 The pitch deck is built as an interactive, deployable web asset.
 
-Click here to view the live presentation:  [IntraStrat OS](https://james-bonaguro.github.io/inter-strat-pitch/)
+Click here to view the live presentation:  [InterStrat OS](https://james-bonaguro.github.io/inter-strat-pitch/)
 
 Navigation
 
