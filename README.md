@@ -12,7 +12,7 @@ View the Presentation
 
 The pitch deck is built as an interactive, deployable web asset.
 
-Click here to view the live presentation (Note: Update this link once GitHub Pages is live)
+Click here to view the live presentation https://james-bonaguro.github.io/inter-strat-pitch/
 
 Navigation
 
