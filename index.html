@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersection Strategies | InterStrat OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            accent: '#3b82f6',
+                            highlight: '#60a5fa'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .slide-fade {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .slide-fade.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light font-sans h-screen w-full overflow-hidden flex flex-col selection:bg-brand-accent selection:text-white">
+
+    <!-- Header -->
+    <header class="w-full p-6 flex justify-between items-center border-b border-slate-800 shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-brand-accent rounded flex items-center justify-center font-bold text-white tracking-tighter">IS</div>
+            <h1 class="text-xl font-semibold tracking-wide text-slate-200">Intersection Strategies</h1>
+        </div>
+        <div class="text-sm font-medium text-slate-400 bg-slate-800 px-3 py-1 rounded-full">
+            Slide <span id="current-slide-indicator">1</span> of 10
+        </div>
+    </header>
+
+    <!-- Main Slide Area -->
+    <main class="flex-grow flex items-center justify-center p-8 md:p-16 relative overflow-hidden">
+        <div id="slide-container" class="w-full max-w-5xl slide-fade">
+            <!-- Content injected via JS -->
+        </div>
+    </main>
+
+    <!-- Footer Controls -->
+    <footer class="w-full p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0 border-t border-slate-800 bg-slate-900/50">
+        <button id="prev-btn" class="px-6 py-2.5 rounded text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 w-full sm:w-auto justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Previous
+        </button>
+        
+        <!-- Progress Bar -->
+        <div class="w-full max-w-md h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-brand-accent transition-all duration-300 ease-out" style="width: 10%;"></div>
+        </div>
+
+        <button id="next-btn" class="px-6 py-2.5 rounded text-sm font-semibold bg-brand-accent hover:bg-brand-highlight text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark focus:ring-brand-accent disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 w-full sm:w-auto justify-center">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+    </footer>
+
+    <script>
+        const slides = [
+            {
+                title: "The Madness of the Current Market",
+                subtitle: "",
+                points: [
+                    { label: "The Situation", text: "Every major firm is mandating AI adoption. They tell their teams, \"Buy a subscription or fall behind. Go figure it out.\"" },
+                    { label: "The Reality", text: "Professionals don't even have the apps downloaded yet. If they do, they treat them like a Google search. When the AI hallucinates or gives a generic, wrong answer—because it lacks context—they assume the tech is overhyped." },
+                    { label: "The Panic Trigger", text: "I am forcing the issue. Once one analyst buys this system and their output 10x's, they become the firm's \"AI Guy.\" They start getting promoted ahead of their peers. The rest of the floor panics, realizes they are obsolete, and immediately buys a license." }
+                ]
+            },
+            {
+                title: "The Missing Layer",
+                subtitle: "",
+                points: [
+                    { label: "The Problem", text: "People aren't just bad at \"prompt engineering\"—they don't even know how to talk to the machine. No one is teaching them the foundational setup." },
+                    { label: "The Truth", text: "AI is a reasoning engine. To get leverage, the model must <em>already know</em> the user's industry, their seniority, the firm's risk tolerance, and the required output format." },
+                    { label: "The Solution", text: "Intersection Strategies doesn't install software; we provide the architectural blueprints. We supply the missing configuration layer that users customize to themselves and their firm." }
+                ]
+            },
+            {
+                title: "The Product (InterStrat OS)",
+                subtitle: "",
+                points: [
+                    { label: "What It Is", text: "We sell a productized digital asset—a one-time license to the InterStrat OS." },
+                    { label: "The Deliverable", text: "A complete \"Done-For-You\" onboarding package consisting of an audio overview, an instructional slide deck, and the actual <code>.md</code> configuration templates they copy into their AI." },
+                    { label: "The Value", text: "We take a professional who barely knows what Claude is and turn them into the top 1% of AI operators at their firm in a single afternoon. It eliminates the 100+ hours they would waste trying to figure it out on YouTube." }
+                ]
+            },
+            {
+                title: "The Moat & The Build-Time Asymmetry",
+                subtitle: "This is the core leverage of the business: the engine is universal.",
+                points: [
+                    { label: "The Build Asymmetry", text: "I built the foundational InterStrat OS from the ground up in a day and a half. Expanding it to a Law Firm will take 1 day. An Accounting Firm will take half a day. The market is infinite, but the manufacturing cost is near zero." },
+                    { label: "System Instructions", text: "We overwrite the AI's default behavior. We strip the \"helpful assistant\" tone and program it to act as an adversarial reasoning partner." },
+                    { label: "Context Files (Skill Files)", text: "The static <code>.md</code> files outlining the firm's specific operating models. The AI reads this background silently <em>before</em> every query, effectively eliminating hallucinations." }
+                ]
+            },
+            {
+                title: "The Doctrine",
+                subtitle: "How People Actually Get Good. Our framework teaches the behavioral shifts required to unlock the tech.",
+                points: [
+                    { label: "The Learning Accelerator", text: "Integrating AI into daily life so you realize it is best used as a learning accelerator, <em>not</em> to offload your brain. (This is exactly how I learned to build this entire system with zero coding background)." },
+                    { label: "Make it Fight You", text: "Teaching the AI to find holes in an investment thesis before the committee does." },
+                    { label: "Voice-to-Text Integration", text: "Dumping raw, unstructured audio thoughts into the system and letting the AI build the structured output." }
+                ]
+            },
+            {
+                title: "Targeted Pipelines (The Viral Loop)",
+                subtitle: "We supply pre-built agents for their most painful bottlenecks. This is what triggers the Trojan Horse viral loop.",
+                points: [
+                    { label: "Private Credit", text: "<em>The IC Memo Drafter.</em> An analyst drops a 100-page CIM into the pipeline; AI extracts covenant traps and formats an Investment Committee memo in 12 minutes." },
+                    { label: "The Result", text: "That analyst goes home at 5 PM. The guy next to him stays until 2 AM. The next day, the guy who stayed until 2 AM buys an InterStrat OS license." }
+                ]
+            },
+            {
+                title: "The Economics & The Liability Shield",
+                subtitle: "",
+                points: [
+                    { label: "Operating Costs", text: "~$150-$200/month (Subscriptions to ChatGPT, Claude, NotebookLM, Whisper)." },
+                    { label: "Headcount", text: "Zero employees. Zero physical overhead. 95%+ profit margins." },
+                    { label: "The Liability Shield", text: "The product is strictly documented as <strong>Educational Use Only</strong>. We supply the framework for <em>how</em> to use the tools; we hold absolute zero liability for the data they input or the financial/legal decisions they execute." }
+                ]
+            },
+            {
+                title: "Go-To-Market (The Trojan Horse)",
+                subtitle: "",
+                points: [
+                    { label: "Bypass Friction", text: "We bypass the friction of top-down enterprise software sales and IT security reviews." },
+                    { label: "Deploy Direct", text: "We deploy the OS licenses directly to individual high-performers (e.g., an AVP in Private Credit) at <strong>$300+ per seat</strong>." },
+                    { label: "Bottom-Up Demand", text: "Their output speed doubles. The individual user becomes an internal evangelist, creating organic, bottom-up demand across the floor." }
+                ]
+            },
+            {
+                title: "The 6-Month Roadmap (The Upsell)",
+                subtitle: "",
+                points: [
+                    { label: "The Foundation", text: "What we are selling them today is just the <em>foundation</em>. It is the extreme basics of what the technology can do." },
+                    { label: "The Ceiling", text: "Once they master the base system, they hit a ceiling. They will want custom agents for highly specific, niche tasks." },
+                    { label: "The Upsell", text: "In 6 months, we sell Phase 2 licenses—teaching them how to build their own \"Skill Files\" and custom agent pipelines, turning them into architects of their own workflows." }
+                ]
+            },
+            {
+                title: "Where I Need Your Help (Strategic Discussion)",
+                subtitle: "",
+                points: [
+                    { label: "Pricing Psychology", text: "How do we best structure the pricing tiers as we inevitably move from the individual $300 wedge to a $5,000+ team standard?" },
+                    { label: "Enterprise Friction", text: "Based on your consulting experience, where will management create the most friction when we try to flip individual licenses into a firm-wide contract?" },
+                    { label: "Legal Structuring", text: "How to bulletproof the \"Educational Use Only\" liability shield as we scale into high-stakes verticals like finance and law." }
+                ]
+            }
+        ];
+
+        let currentIndex = 0;
+        
+        const container = document.getElementById('slide-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const indicator = document.getElementById('current-slide-indicator');
+        const progressBar = document.getElementById('progress-bar');
+
+        function renderSlide(index) {
+            const slide = slides[index];
+            
+            // Fade out
+            container.classList.remove('active');
+            
+            setTimeout(() => {
+                let pointsHtml = slide.points.map(p => `
+                    <li class="mb-6 flex items-start gap-4">
+                        <div class="mt-1.5 w-2 h-2 rounded-full bg-brand-accent shrink-0"></div>
+                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                            <strong class="text-white">${p.label}:</strong> ${p.text}
+                        </p>
+                    </li>
+                `).join('');
+
+                container.innerHTML = `
+                    <div class="mb-10">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">${slide.title}</h2>
+                        ${slide.subtitle ? `<p class="text-xl text-brand-highlight font-medium">${slide.subtitle}</p>` : ''}
+                    </div>
+                    <ul class="space-y-2">
+                        ${pointsHtml}
+                    </ul>
+                `;
+                
+                // Update UI state
+                indicator.innerText = index + 1;
+                progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+                
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === slides.length - 1;
+                
+                // Fade in
+                container.classList.add('active');
+            }, 150); // wait for fade out
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderSlide(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                renderSlide(currentIndex);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                    renderSlide(currentIndex);
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    renderSlide(currentIndex);
+                }
+            }
+        });
+
+        // Initialize
+        renderSlide(currentIndex);
+        // Force initial active state
+        setTimeout(() => container.classList.add('active'), 50);
+
+    </script>
+</body>
+</html>
